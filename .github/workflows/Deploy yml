@@ -1,0 +1,27 @@
+name: Deploy on Kubernetes
+
+on:
+  push:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
+      - name: GCP connexion 
+        id: 'auth'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
+
+      - name: connexion cluster 
+        run: 'gcloud container clusters get-credentials my-first-cluster-1 --zone us-central1-c --project sandbox-kubernetes-350013'
+        
