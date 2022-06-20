@@ -24,4 +24,6 @@ jobs:
 
       - name: connexion cluster 
         run: 'gcloud container clusters get-credentials my-first-cluster-1 --zone us-central1-c --project sandbox-kubernetes-350013'
-        
+      
+      - name: connexion cluster 
+        run: kubectl apply -f deployment.yml      
